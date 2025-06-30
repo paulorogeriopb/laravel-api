@@ -1,0 +1,82 @@
+x-common: &common
+    restart: unless-stopped
+    networks:
+        - gepam
+
+services:
+    # Aplicação Laravel
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        <<: *common
+        working_dir: /var/www
+        volumes:
+            - ./:/var/www
+        depends_on:
+            - db
+            - redis
+        labels:
+            - "service=app"
+
+    # Servidor Nginx
+    nginx:
+        image: nginx:alpine
+        <<: *common
+        ports:
+            - "${NGINX_PORT:-8989}:80" # Porta do .env ou 8989 por padrão
+        volumes:
+            - ./:/var/www
+            - ./docker/nginx/:/etc/nginx/conf.d/
+        depends_on:
+            - app
+        labels:
+            - "service=nginx"
+
+    # Banco de Dados MySQL
+    db:
+        image: mysql:8.0
+        platform: linux/x86_64
+        <<: *common
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_USER: ${DB_USERNAME}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+        volumes:
+            - ./.docker/mysql/dbdata:/var/lib/mysql
+        ports:
+            - "${MYSQL_PORT:-3300}:3306" # Porta do MySQL configurável no .env
+        healthcheck:
+            test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+            retries: 3
+            timeout: 5s
+        labels:
+            - "service=db"
+
+    # Interface PHPMyAdmin
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        platform: linux/x86_64
+        <<: *common
+        ports:
+            - "${PHPMYADMIN_PORT:-8080}:80" # Porta do PHPMyAdmin configurável no .env
+        environment:
+            PMA_HOST: db
+            PMA_PORT: 3306
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-root}
+        depends_on:
+            - db
+        labels:
+            - "service=phpmyadmin"
+
+    # Servidor Redis
+    redis:
+        image: redis:latest
+        <<: *common
+        labels:
+            - "service=redis"
+
+networks:
+    gepam:
+        driver: bridge
