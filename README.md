@@ -14,18 +14,18 @@
 
 ## Alterar no .env
 
-APP_NAME="Nome do Projeto"
-APP_SIGLA="Sigla do Projeto"
+APP_NAME="Nome do Projeto"<br />
+APP_SIGLA="Sigla do Projeto"<br />
 
-DB_DATABASE=Nome_DB
-DB_USERNAME=Nome_User
-DB_PASSWORD=Senha
+DB_DATABASE=Nome_DB<br />
+DB_USERNAME=Nome_User<br />
+DB_PASSWORD=Senha<br />
 
 ## Define Portas para os containers
 
-NGINX_PORT=8580
-MYSQL_PORT=3306
-PHPMYADMIN_PORT=8081
+NGINX_PORT=8580<br />
+MYSQL_PORT=3306<br />
+PHPMYADMIN_PORT=8081<br />
 
 ## LARAVEL SANCTUM
 

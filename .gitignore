@@ -21,3 +21,7 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+
+.docker
+# Ignorar dados persistentes do MySQL
+.docker/mysql/dbdata/
