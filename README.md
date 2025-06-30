@@ -12,11 +12,13 @@
 
 ## sequencia para criar o Projeto
 
-````bash
+```bash
 composer create-project --prefer-dist laravel/laravel laravel-api "11.\*"
+```
 
 ## Alterar no .env
 
+```bash
 APP_NAME="Nome do Projeto"<br />
 APP_SIGLA="Sigla do Projeto"<br />
 
@@ -29,6 +31,7 @@ DB_PASSWORD=Senha<br />
 NGINX_PORT=8580<br />
 MYSQL_PORT=3306<br />
 PHPMYADMIN_PORT=8081<br />
+```
 
 ## LARAVEL SANCTUM
 
@@ -38,4 +41,4 @@ https://laravel.com/docs/11.x/sanctum#main-content
 
 ```bash
 php artisan install:api
-````
+```
