@@ -1,8 +1,10 @@
 ## Requisitos
 
--   PHP 8.2 superior
--   MsQl 8 ou supeior
+-   PHP 8.2 ou superior
+-   MySQL 8 ou superior
 -   Composer
+
+---
 
 ## como rodar o projeto baixado
 
@@ -10,7 +12,8 @@
 
 ## sequencia para criar o Projeto
 
-## composer create-project --prefer-dist laravel/laravel laravel-api "11.\*"
+````bash
+composer create-project --prefer-dist laravel/laravel laravel-api "11.\*"
 
 ## Alterar no .env
 
@@ -33,4 +36,6 @@ https://laravel.com/docs/11.x/sanctum#main-content
 
 ## Instalação
 
+```bash
 php artisan install:api
+````
