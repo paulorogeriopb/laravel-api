@@ -42,3 +42,9 @@ https://laravel.com/docs/11.x/sanctum#main-content
 ```bash
 php artisan install:api
 ```
+
+## Executar a Seeder para gerar registros
+
+```bash
+php artisan db:seed
+```
